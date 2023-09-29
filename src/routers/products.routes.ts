@@ -5,7 +5,7 @@ import { checkProductNameExistence, isProductIdValid } from "../middlewares";
 export const productsRouter = Router();
 
 productsRouter.get("/:productId", isProductIdValid, getProductById);
-productsRouter.get("/", getProducts,);
+productsRouter.get("/", checkProductNameExistence, getProducts,);
 productsRouter.post("/",checkProductNameExistence ,ManageProducts,);
 productsRouter.patch("/",checkProductNameExistence ,isProductIdValid, updateProduct);
 productsRouter.delete("/:productId", isProductIdValid, deleteProduct) 
