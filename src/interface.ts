@@ -4,6 +4,6 @@ export interface IProduct {
     price: number;
     weight: number;
     section: "food" | "cleaning";
-    calories: number | null | undefined;
-    expirationDate: Date;
+    calories?: number;
+    expirationDate?: Date;
 }

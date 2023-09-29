@@ -22,25 +22,37 @@ export const getProducts = (req: Request, res: Response) => {
 
 export const ManageProducts = (req: Request, res: Response) => {
     
-    const { name, price, weight, section, calories,} = req.body;
+    const { name, price, weight, section, calories } = req.body;
 
-    const newProduct = {
+    const existingProduct = market.find((product) => product.name === name);
+
+    if (existingProduct) {
+        return res.status(400).json({ "message": "Product already registered." });
+    }
+
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 365);
+
+    const newProduct: IProduct = {
         id: nextProductId, 
         name,
         price,
         weight,
-        calories,
         section,
-        expirationDate: new Date
-            
+        calories,
+        expirationDate,
     };
 
     market.push(newProduct);
 
     nextProductId++;
 
-    return res.status(201).json({ "message": "Product already registered.", ManageProducts: newProduct });
+    return res.status(201).json({ "message": "Product registered successfully.", ManageProducts: newProduct });
 }
+
+
+
+
 
 export const updateProduct = (req: Request, res: Response) => {
     const productId = Number(req.params.productId);
