@@ -15,11 +15,16 @@ export const getProductById = (req: Request, res: Response) => {
     }
 }
 
-
 export const getProducts = (req: Request, res: Response) => {
-    return res.status(200).json(market);
-}
+    const total = market.length;
 
+    const response = {
+        total,
+        products: market
+    };
+
+    return res.status(200).json(response);
+}
 export const ManageProducts = (req: Request, res: Response) => {
     
     const { name, price, weight, section, calories } = req.body;
@@ -47,9 +52,8 @@ export const ManageProducts = (req: Request, res: Response) => {
 
     nextProductId++;
 
-    return res.status(201).json({ "message": "Product registered successfully.", ManageProducts: newProduct });
+    return res.status(201).json(newProduct);
 }
-
 
 
 
@@ -78,7 +82,7 @@ export const updateProduct = (req: Request, res: Response) => {
             updatedProduct.calories === existingProduct.calories &&
             updatedProduct.expirationDate === existingProduct.expirationDate
         ) {
-            return res.status(400).json({ message: "Product already registered." });
+            return res.status(409).json({ message: "Product already registered." });
         } else {
             market[index] = updatedProduct;
             return res.status(200).json(updatedProduct);
@@ -87,6 +91,7 @@ export const updateProduct = (req: Request, res: Response) => {
         return res.status(404).json({ message: "Product not found." });
     }
 };
+
 
 export const deleteProduct = (req: Request, res: Response) => {
     const productId = Number(req.params.productId);

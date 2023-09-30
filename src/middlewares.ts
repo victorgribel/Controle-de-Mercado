@@ -17,7 +17,7 @@ export function checkProductNameExistence(req: Request, res: Response, next: Nex
     const productId = req.params.productId;
 
     if (market.some(product => product.name === productName && product.id !== Number(productId))) {
-        return res.status(409).json({ message: "Product name already registered." });
+        return res.status(409).json({ message: "Product already registered." });
     }
     next();
 }
