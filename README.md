@@ -296,7 +296,4 @@ O exemplo abaixo foi realizado na seguinte rota: `/products/9999` informando um 
 }
 ```
 
-## Importante!
 
-Não esqueça de adicionar **_team-m4-correcoes_** no seu repositório do github, para que seja possível realizarmos as correções.
-Também não se esqueça de enviar o link do repositório na submissão da entrega.
